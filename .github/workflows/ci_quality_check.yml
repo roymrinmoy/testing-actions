@@ -55,10 +55,10 @@ jobs:
 
       # Run EsLint and Prettier check
 
-      # - uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 16
-      #     cache: "npm"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
       #     cache-dependency-path: ./my-app/package-lock.json
 
       # - uses: actions/cache@v2
@@ -66,22 +66,22 @@ jobs:
       #     path: "**/node_modules"
       #     key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Cache Node Modules
-        uses: actions/cache@v3
-        id: npmCacheStep
-        working-directory: ./my-app
-        env:
-          cache-name: cache-npm-deps
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+      # - name: Cache Node Modules
+      #   uses: actions/cache@v3
+      #   id: npmCacheStep
+      #   working-directory: ./my-app
+      #   env:
+      #     cache-name: cache-npm-deps
+      #   with:
+      #     path: node_modules
+      #     key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-build-${{ env.cache-name }}-
+      #       ${{ runner.os }}-build-
+      #       ${{ runner.os }}-
 
       - name: Install NPM
-        if: steps.npmCacheStep.outputs.cache-hit != 'true'
+        # if: steps.npmCacheStep.outputs.cache-hit != 'true'
         working-directory: ./my-app
         run: npm ci
 
