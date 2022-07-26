@@ -31,5 +31,10 @@ jobs:
           cache-dependency-path: ./my-app/package-lock.json
 
       - run: npm ci
+        working-directory: ./my-app
+
       - run: npm run pretty:check
+        working-directory: ./my-app
+
       - run: npm run lint:error
+        working-directory: ./my-app
