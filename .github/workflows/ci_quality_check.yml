@@ -51,11 +51,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # Run EsLint and Prettier check
 
-      - uses: actions/setup-node@v3
+      - name: "Setup Node"
+        uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: "npm"
